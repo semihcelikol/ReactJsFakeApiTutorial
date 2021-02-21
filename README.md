@@ -1,6 +1,6 @@
 # Description
 Data get and post operations are carried out using [Axios](https://github.com/axios/axios).
-Fake Api link: [jsonplaceholder](https://jsonplaceholder.typicode.com/)
+Fake Api Link: [jsonplaceholder](https://jsonplaceholder.typicode.com/)
 
 # Getting Started with Create React App
 

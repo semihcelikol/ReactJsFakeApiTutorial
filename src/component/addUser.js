@@ -19,8 +19,8 @@ export default class AddUser extends React.Component {
 
     axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
       .then(res => {
-        console.log(res);
         console.log(res.data);
+        alert(user.name + " added to users.");
       })
   }
 
