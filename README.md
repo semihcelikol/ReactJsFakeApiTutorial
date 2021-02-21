@@ -1,3 +1,7 @@
+# Description
+Data get and post operations are carried out using [Axios](https://github.com/axios/axios).
+Fake Api link: [jsonplaceholder](https://jsonplaceholder.typicode.com/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
