@@ -13,41 +13,61 @@ export default class Todos extends Component {
     }
 
     render() {
-        return (
-            <div className="container">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">User Id</th>
-                            <th scope="col">Title</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.todoList.map(item => {
-                                    return (
-                                        <tr key={item.id}>
-                                            <th scope="row">{item.id}</th>
-                                            <td>{item.userId}</td>
-                                            <td>{item.title}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                </table>
-            </div>
-        )
+        let ret;
+
+        if (this.state.isLoaded == true) {
+            ret= (
+                <div className="container">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">User Id</th>
+                                <th scope="col">Title</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.todoList.map(item => {
+                                        return (
+                                            <tr key={item.id}>
+                                                <th scope="row">{item.id}</th>
+                                                <td>{item.userId}</td>
+                                                <td>{item.title}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                    </table>
+                </div>
+            )
+        }
+        else
+        {
+            ret = (
+                <div className="container">
+                    <h1>Error</h1>
+                </div>
+            )
+        }
+
+        return ret;
     }
 
     componentDidMount = async () => {
 
-        const response = await axios.get("https://jsonplaceholder.typicode.com/todos");
-
-        this.setState({
-            todoList: response.data,
-            isLoaded: true
-        });
+        await axios.get("https://jsonplaceholder.typicode.com/todos")
+        .then(result => {
+            this.setState({
+                todoList: result.data,
+                isLoaded: true
+            });
+        }).catch(err => {
+            this.setState({
+                todoList: [],
+                isLoaded: false
+            });
+        });        
     }
 }

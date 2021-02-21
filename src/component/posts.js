@@ -13,7 +13,10 @@ export default class Posts extends Component {
     }
 
     render() {
-        return (
+        let ret;
+
+        if (this.state.isLoaded == true) {
+            ret = (
             <div className="container">
                 <table className="table">
                     <thead>
@@ -39,17 +42,33 @@ export default class Posts extends Component {
                             }
                         </tbody>
                 </table>
+            </div>);
+        }
+        else
+        {
+            ret = (
+            <div className="container">
+                <h1>Error</h1>
             </div>
-        )
+            );
+        }
+
+        return ret;
     }
 
     componentDidMount = async () => {
 
-        const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
-
-        this.setState({
-            postList: response.data,
-            isLoaded: true
+        await axios.get("https://jsonplaceholder.typicode.com/posts")
+        .then(res=>{
+            this.setState({
+                postList: res.data,
+                isLoaded: true
+            });
+        }).catch(x=> {
+            this.setState({
+                postList: [],
+                isLoaded: false
+            });
         });
     }
 }
